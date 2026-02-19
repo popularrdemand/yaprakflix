@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const card = document.createElement("div");
       card.className = "card";
       card.tabIndex = 0;
-      const coverPath = `/assets/img/covers/${ep.id}.jpg`;
+      const coverPath = `./assets/img/covers/${ep.id}.jpg`;
 
       let displayPercent = 0;
       if (typeof ep.savedData === "object" && ep.savedData.percent) {
@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const card = document.createElement("div");
       card.className = "card";
       card.tabIndex = 0;
-      const coverPath = `/assets/img/covers/${ep.id}.jpg`;
+      const coverPath = `./assets/img/covers/${ep.id}.jpg`;
 
       card.innerHTML = `
         <img src="${coverPath}" onerror="this.parentElement.style.display='none'">

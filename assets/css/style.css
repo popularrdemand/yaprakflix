@@ -1,11 +1,11 @@
 @font-face {
   font-family: "Netflix Sans";
-  src: url("/assets/fonts/NetflixSans-Regular.otf");
+  src: url("./assets/fonts/NetflixSans-Regular.otf");
   font-weight: normal;
 }
 @font-face {
   font-family: "Netflix Sans";
-  src: url("/assets/fonts/NetflixSans-Bold.otf");
+  src: url("./assets/fonts/NetflixSans-Bold.otf");
   font-weight: bold;
 }
 
@@ -30,7 +30,7 @@ body {
   background:
     linear-gradient(to right, var(--bg) 0%, transparent 80%),
     linear-gradient(to bottom, transparent 60%, var(--bg) 100%),
-    url("/assets/img/yaprak-dokumu.jpg");
+    url("./assets/img/yaprak-dokumu.jpg");
   background-size: cover;
   background-position: center 80%;
   display: flex;
