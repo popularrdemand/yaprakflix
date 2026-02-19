@@ -2,7 +2,7 @@
 <html lang="tr">
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
     <div class="billboard">
@@ -19,7 +19,7 @@
 
     <div id="main-rows"></div>
 
-    <script src="/assets/js/main.js"></script>
+    <script src="./assets/js/main.js"></script>
     <script>
       document.getElementById("main-play").onclick = () => {
         const progressData = JSON.parse(
@@ -42,8 +42,8 @@
           });
         }
 
-        const coverPath = `/assets/img/covers/${targetEp.id}.jpg`;
-        window.location.href = `/watch.html?id=${targetEp.id}&url=${encodeURIComponent(targetEp.url)}&poster=${encodeURIComponent(coverPath)}&title=${encodeURIComponent(targetEp.title)}`;
+        const coverPath = `./assets/img/covers/${targetEp.id}.jpg`;
+        window.location.href = `./watch.html?id=${targetEp.id}&url=${encodeURIComponent(targetEp.url)}&poster=${encodeURIComponent(coverPath)}&title=${encodeURIComponent(targetEp.title)}`;
       };
     </script>
   </body>
