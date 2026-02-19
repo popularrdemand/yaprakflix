@@ -283,16 +283,26 @@ body {
 
 /* Video üstü bilgi paneli */
 .video-overlay-info {
-  position: absolute;
-  top: 40px;
-  left: 40px; /* Geri dön butonuyla çakışmaması için biraz aşağıda veya sağda tutabiliriz */
-  z-index: 10;
+  position: fixed; /* absolute yerine fixed kullanarak ekrana çiviliyoruz */
+  top: 100px;
+  left: 50px;
+  z-index: 2147483647 !important; /* Tarayıcının izin verdiği en yüksek değer */
   font-family: "Netflix Sans", sans-serif;
   color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  text-shadow: 2px 2px 15px rgba(0, 0, 0, 1); /* Okunurluk için gölgeyi artırdık */
+  pointer-events: none;
   opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none; /* Mouse'u engellememesi için */
+  transition: opacity 0.4s ease;
+  display: block !important; /* Görünmez olsa bile orada durduğundan emin olalım */
+}
+
+/* Plyr kontrolleri görünürken yazıyı göster */
+/* Hem paused hem de hover durumlarını tek tek garantiye alalım */
+.plyr--paused ~ .video-overlay-info,
+.plyr--hover ~ .video-overlay-info,
+.plyr--searching ~ .video-overlay-info,
+.video-wrapper:hover .video-overlay-info {
+  opacity: 1 !important;
 }
 
 .video-overlay-info h2 {
