@@ -1,11 +1,11 @@
 @font-face {
   font-family: "Netflix Sans";
-  src: url("./assets/fonts/NetflixSans-Regular.otf");
+  src: url("../fonts/NetflixSans-Regular.otf");
   font-weight: normal;
 }
 @font-face {
   font-family: "Netflix Sans";
-  src: url("./assets/fonts/NetflixSans-Bold.otf");
+  src: url("../fonts/NetflixSans-Bold.otf");
   font-weight: bold;
 }
 
