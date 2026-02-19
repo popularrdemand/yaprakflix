@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       `;
       card.onclick = () => {
-        window.location.href = `/watch.html?id=${ep.id}&url=${encodeURIComponent(ep.url)}&poster=${encodeURIComponent(coverPath)}&title=${encodeURIComponent(ep.title)}`;
+        window.location.href = `./watch.html?id=${ep.id}&url=${encodeURIComponent(ep.url)}&poster=${encodeURIComponent(coverPath)}&title=${encodeURIComponent(ep.title)}`;
       };
       continueList.appendChild(card);
     });
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
 
       card.onclick = () => {
-        window.location.href = `/watch.html?id=${ep.id}&url=${encodeURIComponent(ep.url)}&poster=${encodeURIComponent(coverPath)}&title=${encodeURIComponent(ep.title)}`;
+        window.location.href = `./watch.html?id=${ep.id}&url=${encodeURIComponent(ep.url)}&poster=${encodeURIComponent(coverPath)}&title=${encodeURIComponent(ep.title)}`;
       };
       list.appendChild(card);
     });
