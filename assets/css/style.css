@@ -98,8 +98,6 @@ body {
   flex-shrink: 0;
 }
 
-/* --- AVALON PREMİUM AKIŞ (YUKARIDAN GİRİŞ / AŞAĞIDAN ÇIKIŞ) --- */
-
 .card .play-overlay {
   position: absolute;
   top: 50%;
@@ -281,4 +279,36 @@ body {
 }
 .card:focus-within .play-overlay::before {
   animation: avalon-in 0.4s forwards;
+}
+
+/* Video üstü bilgi paneli */
+.video-overlay-info {
+  position: absolute;
+  top: 40px;
+  left: 40px; /* Geri dön butonuyla çakışmaması için biraz aşağıda veya sağda tutabiliriz */
+  z-index: 10;
+  font-family: "Netflix Sans", sans-serif;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none; /* Mouse'u engellememesi için */
+}
+
+.video-overlay-info h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.video-overlay-info p {
+  margin: 5px 0 0;
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+/* Plyr kontrolleri görünürken (hover veya pause) bilgiyi göster */
+.plyr--paused .video-overlay-info,
+.plyr--hover .video-overlay-info {
+  opacity: 1;
 }

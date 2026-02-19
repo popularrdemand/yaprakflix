@@ -85,3 +85,14 @@ if (videoUrl) {
     saveProgress(videoId, 0, 100);
   });
 }
+
+// player.js dosyanızın en üstüne veya parametrelerin alındığı yere ekleyin:
+const urlParams = new URLSearchParams(window.location.search);
+const episodeTitle = urlParams.get("title"); // Örn: "1. Bölüm"
+const seasonTitle = urlParams.get("season") || "1. Sezon"; // URL'de yoksa varsayılan 1. Sezon
+
+// HTML'deki elementleri güncelle
+if (episodeTitle) {
+  document.getElementById("info-episode-detail").textContent =
+    `${seasonTitle}, ${episodeTitle}`;
+}

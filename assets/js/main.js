@@ -5,7 +5,7 @@ const generateSeriesData = () => {
     { name: "2. Sezon", folder: "02", count: 42, offset: 38 },
     { name: "3. Sezon", folder: "03", count: 38, offset: 80 },
     { name: "4. Sezon", folder: "04", count: 45, offset: 118 },
-    { name: "5. Sezon", folder: "05", count: 11, offset: 163 }, // Count 17'den 11'e düşürüldü (163+11=174)
+    { name: "5. Sezon", folder: "05", count: 11, offset: 163 },
   ];
 
   seasons.forEach((s) => {
@@ -35,7 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   const startedEpisodes = [];
 
-  // 1. İZLEMEYE DEVAM ET MANTIĞI
   Object.keys(window.seriesData).forEach((season) => {
     window.seriesData[season].forEach((ep) => {
       const saved = progressData[ep.id];
@@ -79,13 +78,12 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       `;
       card.onclick = () => {
-        window.location.href = `./watch.html?id=${ep.id}&url=${encodeURIComponent(ep.url)}&poster=${encodeURIComponent(coverPath)}&title=${encodeURIComponent(ep.title)}`;
+        window.location.href = `./watch.html?id=${ep.id}&url=${encodeURIComponent(ep.url)}&poster=${encodeURIComponent(coverPath)}&title=${encodeURIComponent(ep.title)}&season=${encodeURIComponent(ep.seasonName)}`;
       };
       continueList.appendChild(card);
     });
   }
 
-  // 2. NORMAL SEZONLARI DÖKME
   Object.keys(window.seriesData).forEach((seasonName) => {
     const row = document.createElement("div");
     row.className = "row-container";
@@ -108,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
 
       card.onclick = () => {
-        window.location.href = `./watch.html?id=${ep.id}&url=${encodeURIComponent(ep.url)}&poster=${encodeURIComponent(coverPath)}&title=${encodeURIComponent(ep.title)}`;
+        window.location.href = `./watch.html?id=${ep.id}&url=${encodeURIComponent(ep.url)}&poster=${encodeURIComponent(coverPath)}&title=${encodeURIComponent(ep.title)}&season=${encodeURIComponent(seasonName)}`;
       };
       list.appendChild(card);
     });
