@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+  </head>
+  <body>
+    <div class="billboard">
+      <div class="title-info">
+        <img src="/assets/img/logo.webp" width="300" />
+        <h1>Yaprak Dökümü</h1>
+        <p class="description">
+          Emekli kaymakam Ali Rıza Bey’in ailesiyle İstanbul’a taşınmasıyla
+          başlayan fırtınalı bir yaşam mücadelesi.
+        </p>
+        <button class="play-button" id="main-play"><span>▶</span> Oynat</button>
+      </div>
+    </div>
+
+    <div id="main-rows"></div>
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+      document.getElementById("main-play").onclick = () => {
+        const progressData = JSON.parse(
+          localStorage.getItem("yaprak_progress") || "{}",
+        );
+        const startedIds = Object.keys(progressData);
+
+        // seriesData henüz yüklenmemişse bekle (main.js en üstte tanımlandığı için genelde hazırdır)
+        const data = window.seriesData;
+        if (!data) return;
+
+        let targetEp = data["1. Sezon"][0];
+
+        if (startedIds.length > 0) {
+          // En son kaydedilen anahtarı (bölümü) bul
+          const lastId = startedIds[startedIds.length - 1];
+          Object.keys(data).forEach((s) => {
+            const found = data[s].find((e) => e.id === lastId);
+            if (found) targetEp = found;
+          });
+        }
+
+        const coverPath = `/assets/img/covers/${targetEp.id}.jpg`;
+        window.location.href = `/watch.html?id=${targetEp.id}&url=${encodeURIComponent(targetEp.url)}&poster=${encodeURIComponent(coverPath)}&title=${encodeURIComponent(targetEp.title)}`;
+      };
+    </script>
+  </body>
+</html>

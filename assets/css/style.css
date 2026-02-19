@@ -1,0 +1,284 @@
+@font-face {
+  font-family: "Netflix Sans";
+  src: url("/assets/fonts/NetflixSans-Regular.otf");
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Netflix Sans";
+  src: url("/assets/fonts/NetflixSans-Bold.otf");
+  font-weight: bold;
+}
+
+:root {
+  --netflix-red: #e50914;
+  --plyr-color-main: var(--netflix-red);
+  --bg: #141414;
+  --transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+body {
+  background-color: var(--bg);
+  color: white;
+  font-family: "Netflix Sans", sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.billboard {
+  height: 80vh;
+  position: relative;
+  background:
+    linear-gradient(to right, var(--bg) 0%, transparent 80%),
+    linear-gradient(to bottom, transparent 60%, var(--bg) 100%),
+    url("/assets/img/yaprak-dokumu.jpg");
+  background-size: cover;
+  background-position: center 80%;
+  display: flex;
+  align-items: center;
+  padding: 0 4%;
+}
+
+.title-info h1 {
+  font-size: 4rem;
+  font-weight: bold;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.play-button {
+  background-color: #fff;
+  color: #000;
+  border: none;
+  padding: 12px 35px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: var(--transition);
+}
+
+.row-container {
+  padding: 20px 0 0;
+  position: relative;
+  z-index: 5;
+}
+
+.row-header {
+  padding-left: 4%;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.slider {
+  display: flex;
+  overflow-x: auto;
+  gap: 12px;
+  padding: 20px 4% 40px 4% !important;
+  scrollbar-width: none;
+}
+
+.slider::-webkit-scrollbar {
+  display: none;
+}
+
+.card {
+  min-width: 280px;
+  max-width: 280px;
+  aspect-ratio: 16/9;
+  cursor: pointer;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  transition: var(--transition);
+  outline: 3px solid transparent;
+  background: #222;
+  flex-shrink: 0;
+}
+
+/* --- AVALON PREMİUM AKIŞ (YUKARIDAN GİRİŞ / AŞAĞIDAN ÇIKIŞ) --- */
+
+.card .play-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  z-index: 10;
+  overflow: hidden;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+}
+
+.card .play-overlay::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--netflix-red);
+  border-radius: 50%;
+  left: 0;
+  top: -100%; /* Varsayılan bekleme yeri: Tepe */
+  z-index: -1;
+  /* Çıkış animasyonu varsayılan olarak tanımlı */
+  animation: avalon-out 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.card:hover .play-overlay::before {
+  /* Hover anında giriş animasyonunu tetikle */
+  animation: avalon-in 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* GİRİŞ: Yukarıdan gelip merkeze oturur */
+@keyframes avalon-in {
+  from {
+    top: -100%;
+  }
+  to {
+    top: 0;
+  }
+}
+
+/* ÇIKIŞ: Merkezden başlayıp aşağı akar */
+@keyframes avalon-out {
+  from {
+    top: 0;
+  }
+  to {
+    top: 100%;
+  }
+}
+
+/* -------------------------------------- */
+
+.card .play-overlay span {
+  display: block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 0 10px 16px;
+  border-color: transparent transparent transparent #ffffff;
+  margin-left: 4px;
+  z-index: 11;
+  transition: transform 0.3s ease;
+}
+
+.card:hover,
+.card:focus {
+  transform: scale(1.05);
+  z-index: 100;
+  outline: 3px solid white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+.card:hover .play-overlay {
+  transform: translate(-50%, -50%) scale(1);
+  border-color: transparent;
+}
+
+.card:hover .play-overlay span {
+  transform: scale(1.1);
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: filter 0.4s ease;
+}
+
+.card:hover img {
+  filter: brightness(0.5);
+}
+
+.player-wrapper {
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.plyr {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+}
+
+.plyr video {
+  object-fit: contain;
+}
+
+.plyr--full-ui input[type="range"] {
+  color: var(--netflix-red) !important;
+}
+.plyr__control--overlaid {
+  background: rgba(229, 9, 20, 0.8) !important;
+}
+.plyr--video .plyr__control:hover {
+  background: var(--netflix-red) !important;
+}
+
+.plyr__controls {
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8)) !important;
+  padding: 40px 20px 20px !important;
+}
+
+.player-back-btn {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  z-index: 2000;
+  text-decoration: none;
+  color: white;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0.6;
+  transition: var(--transition);
+  background: rgba(0, 0, 0, 0.4);
+  padding: 10px 20px;
+  border-radius: 30px;
+}
+
+.player-back-btn:hover {
+  opacity: 1;
+  transform: translateX(-5px);
+  background: rgba(229, 9, 20, 0.8);
+}
+
+.progress-container {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+}
+.progress-bar {
+  height: 100%;
+  background: var(--netflix-red);
+}
+/* Kumanda odağını zorlamak için */
+.card:focus-within {
+  transform: scale(1.05);
+  outline: 3px solid white;
+}
+.card:focus-within .play-overlay::before {
+  animation: avalon-in 0.4s forwards;
+}
